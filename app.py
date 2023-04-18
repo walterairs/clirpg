@@ -5,12 +5,13 @@ monsters and gains xp and itmes.
 
 import time
 import os
+from loadhandler import Persistent
 from entities.player import Player
 
 def game_loop(game):
     while game.name == '':
         clear()
-        print('Welcome to the CLIRPG!')
+        print("Greetings,")
         print("Tell me your name, adventurer!")
         name = input('Enter your name: ')
         game.name = name
@@ -27,13 +28,13 @@ def game_loop(game):
         You have been given a sword and a shield to help you
         on your quest.
         ''')
-        time.sleep(5)
+        input('Press enter to continue...')
         clear()
         game.generate_sword(game.level)
         game.generate_shield(game.level)
         print('You have been given a sword {}!, it does {} damage!'.format(game.sword.name, game.sword.damage))
         print('You have been given a shield {}!, it has {} defense!'.format(game.shield.name, game.shield.defense))
-        time.sleep(3)
+        input('Press enter to continue...')
         game.introDone = True
 
     while True:
@@ -44,15 +45,21 @@ def game_loop(game):
         2. Rest
         3. Exit
         ''')
-        print('items: {} {}'.format(game.sword.name, game.shield.name))
+        print('items:')
+        print('{} dmg[{}]' .format(game.sword.name, game.sword.damage))
+        print('{} def[{}]' .format(game.shield.name, game.shield.defense))
         print('hp: {}'.format(game.hp))
         print('xp: {}'.format(game.xp))
         print('level: {}'.format(game.level))
         choice = input('Enter your choice: ')
         if choice == '1':
-            game.generate_enemy()
+            clear()
+            game.generate_enemy(game.level)
             print('You have encountered a {}!'.format(game.enemy.name))
-            time.sleep(1)
+            print('stats:')
+            print('hp: {}'.format(game.enemy.hp))
+            print('damage: {}'.format(game.enemy.dmg))
+            input('Press enter to continue...')
             while True:
                 clear()
                 print('What do you want to do?, {}!'.format(game.name))
@@ -73,7 +80,7 @@ def game_loop(game):
                         if game.xp >= 100:
                             game.level += 1
                             game.xp = 0
-                            game.maxHp += 10
+                            game.maxHp = game.level * 100
                             game.hp = game.maxHp
                             print('You leveled up! You are now level {}!'.format(game.level))
                             print('You gained 10 hp! You now have {} hp!'.format(game.hp))
@@ -120,6 +127,8 @@ def game_loop(game):
             if game.hp > game.maxHp:
                 game.hp = game.maxHp
         elif choice == '3':
+            data = game.toJSON()
+            ##print(data)
             exit()
         else:
             print('Invalid choice!')

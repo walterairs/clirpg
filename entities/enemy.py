@@ -5,18 +5,18 @@ class Enemy():
     enemynames = names.readlines()
     names.close()
 
-    def __init__(self):
+    def __init__(self, statBase):
         self.name = ""
         self.hp = 0
         self.maxHp = 0
         self.dmg = 0
-        self.generate_random_enemy()
+        self.generate_random_enemy(statBase)
 
-    def generate_random_enemy(self):
+    def generate_random_enemy(self, statBase):
         self.name = random.choice(self.enemynames)
-        self.hp = random.randint(10, 100)
+        self.hp = random.randint(statBase*10, statBase*100)
         self.maxHp = self.hp
-        self.dmg = random.randint(1, 10)
+        self.dmg = random.randint(statBase*10 - 4, statBase*10 + 2)
 
     def attack(self, player):
         player.hp -= self.dmg

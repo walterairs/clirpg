@@ -1,5 +1,6 @@
 from entities.enemy import Enemy
 import random
+import json
 
 class Player():
 
@@ -20,8 +21,8 @@ class Player():
     def generate_shield(self, maxDefense):
         self.shield = Shield(maxDefense)
 
-    def generate_enemy(self):
-        self.enemy = Enemy()
+    def generate_enemy(self, statBase):
+        self.enemy = Enemy(statBase)
 
     def attack(self, enemy):
         enemy.hp -= self.sword.damage
@@ -36,10 +37,12 @@ class Player():
             return True
         else:
             return False
-
+        
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__, 
+            sort_keys=True, indent=4)
 
 class Sword():
-    ##Take swordnames from a file swordnames.txt
     swords = open("entities/swordnames.txt", "r")
     swordnames = swords.readlines()
     swords.close()
