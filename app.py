@@ -19,7 +19,7 @@ def game_loop(game):
 
     while game.introDone == False:
         clear()
-        print('Welcome to the CLIRPG!')
+        print('Year 20B.c. in the kingdom of Aria')
         print('''
         You are an adventurer in a world full of monsters.
         You have been tasked by the king to slay the endless hoarding monsters
@@ -78,8 +78,8 @@ def game_loop(game):
                             print('You leveled up! You are now level {}!'.format(game.level))
                             print('You gained 10 hp! You now have {} hp!'.format(game.hp))
                         time.sleep(1)
-                        game.generate_sword()
-                        game.generate_shield()
+                        game.generate_sword(game.level)
+                        game.generate_shield(game.level)
                         print('You found a {}! It does {} damage!'.format(game.sword.name, game.sword.damage))
                         print('You found a {}! It has {} defense!'.format(game.shield.name, game.shield.defense))
                         time.sleep(4)
