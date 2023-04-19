@@ -1,8 +1,14 @@
 from entities.enemy import Enemy
+from entities.sword import Sword
+from entities.shield import Shield
 import random
 import json
 
+
 class Player():
+    prompts = open("entities\\conf\\prompts.txt", "r")
+    promptslist = prompts.readlines()
+    prompts.close()
 
     def __init__(self):
         self.name = ""
@@ -14,6 +20,7 @@ class Player():
         self.enemy = None
         self.xp = 0
         self.level = 1
+        self.prompt = ""
 
     def generate_sword(self, maxDamage):
         self.sword = Sword(maxDamage)
@@ -25,7 +32,10 @@ class Player():
         self.enemy = Enemy(statBase)
 
     def attack(self, enemy):
-        enemy.hp -= self.sword.damage
+        if enemy.hp - self.sword.damage <= 0:
+            enemy.hp = 0
+        else:
+            enemy.hp -= self.sword.damage
 
     def defend(self):
         self.hp += self.shield.defense
@@ -37,26 +47,14 @@ class Player():
             return True
         else:
             return False
-        
+
+    def level_up(self):
+        self.level += 1
+        self.xp = 0
+        self.maxHp = self.level * 100
+        self.hp = self.maxHp
+        self.prompt = random.choice(self.promptslist)
+
     def toJSON(self):
-        return json.dumps(self, default=lambda o: o.__dict__, 
-            sort_keys=True, indent=4)
-
-class Sword():
-    swords = open("entities/swordnames.txt", "r")
-    swordnames = swords.readlines()
-    swords.close()
-
-    def __init__(self, maxDamage):
-        self.name = random.choice(self.swordnames)
-        self.damage = random.randint(maxDamage*10 - 3, maxDamage*10 + 3)
-
-
-class Shield():
-    shields = open("entities/shieldnames.txt", "r")
-    shieldnames = shields.readlines()
-    shields.close()
-
-    def __init__(self, maxDefense):
-        self.name = random.choice(self.shieldnames)
-        self.defense = random.randint(maxDefense*10 - 3, maxDefense*10 + 3)
+        return json.dumps(self, default=lambda o: o.__dict__,
+                          sort_keys=True, indent=4)

@@ -1,7 +1,7 @@
 import random
 
 class Enemy():
-    names = open("entities/enemynames.txt", "r")
+    names = open("entities\conf\enemynames.txt", "r")
     enemynames = names.readlines()
     names.close()
 
@@ -25,6 +25,7 @@ class Enemy():
 
     def is_dead(self):
         if self.hp <= 0:
+            self.hp = 0
             return True
         else:
             return False
