@@ -1,4 +1,4 @@
-"""Import for json I/O and access to other files"""
+"""Module for player functionalities"""
 from types import SimpleNamespace
 import random
 import json
@@ -15,9 +15,9 @@ class Player():
 
     def __init__(self):
         self.name = ""
-        self.introDone = False
+        self.intro_done = False
         self.hp = 100
-        self.maxHp = 100
+        self.max_hp = 100
         self.sword = None
         self.shield = None
         self.enemy = None
@@ -50,8 +50,8 @@ class Player():
     def defend(self):
         '''Method to heal the player during combat'''
         self.hp += self.shield.defense
-        if self.hp > self.maxHp:
-            self.hp = self.maxHp
+        if self.hp > self.max_hp:
+            self.hp = self.max_hp
 
     def is_dead(self):
         '''To find out if player dead or not'''
@@ -64,17 +64,17 @@ class Player():
         '''Level up handler'''
         self.level += 1
         self.xp = 0
-        self.maxHp = self.level * 10
-        self.hp = self.maxHp
+        self.max_hp = self.level * 10
+        self.hp = self.max_hp
         self.prompt = random.choice(self.promptslist)
 
     def to_json(self):
         '''Saving object to json'''
         data = {
             'name':self.name,
-            'introDone':self.introDone,
+            'introDone':self.intro_done,
             'hp':self.hp,
-            'maxhp':self.maxHp,
+            'max_hp':self.max_hp,
             'xp':self.xp,
             'level':self.level,
             'prompt':self.prompt
@@ -90,9 +90,9 @@ class Player():
         data = loadhandler.Persistent.resjson('entities/player.json')
         if 'name' in data:
             self.name = data['name']
-            self.introDone = data['introDone']
+            self.intro_done = data['introDone']
             self.hp = data['hp']
-            self.maxHp = data['maxhp']
+            self.max_hp = data['max_hp']
             self.xp = data ['xp']
             self.level = data ['level']
             self.prompt = data ['prompt']

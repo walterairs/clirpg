@@ -1,4 +1,4 @@
-"""Needed for randomization"""
+"""Module for creating and updating shield"""
 import random
 
 class Shield():

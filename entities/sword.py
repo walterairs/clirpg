@@ -1,4 +1,4 @@
-"""Needed for randomization"""
+"""Module for creating and updating sword"""
 import random
 
 class Sword():
@@ -7,9 +7,9 @@ class Sword():
     swordnames = swords.readlines()
     swords.close()
 
-    def __init__(self,maxDamage):
+    def __init__(self,max_damage):
         self.name = random.choice(self.swordnames)
-        self.damage = random.randint(maxDamage * 10 - 3, maxDamage * 10 + 3)
+        self.damage = random.randint(max_damage * 10 - 3, max_damage * 10 + 3)
 
     def serialize(self):
         '''Method to serialize object data for json'''

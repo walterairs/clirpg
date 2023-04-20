@@ -16,10 +16,10 @@ def game_loop(game):
         print("Tell me your name, adventurer!")
         name = input('Enter your name: ')
         game.name = name
-        print('Hello, {}!'.format(game.name))
+        print(f'Hello, {game.name}!')
         time.sleep(1)
 
-    while game.introDone is False:
+    while game.intro_done is False:
         clear()
         print('Year 20B.c. in the kingdom of Aria')
         print('''
@@ -33,24 +33,22 @@ def game_loop(game):
         clear()
         game.generate_sword(game.level)
         game.generate_shield(game.level)
-        print('You have been given a sword {}'.format(game.sword.name))
+        print(f'You have been given a sword {game.sword.name}')
         print(
             Colors.FAIL +
-            'It does {} damage!' .format(
-                game.sword.damage) +
+            f'It does {game.sword.damage} damage!'  +
             Colors.ENDC)
-        print('You have been given a shield {}'.format(game.shield.name))
+        print(f'You have been given a shield {game.shield.name}')
         print(
             Colors.OKBLUE +
-            'It has {} defense!' .format(
-                game.shield.defense) +
+            f'It has {game.shield.defense} defense!' +
             Colors.ENDC)
         input('Press enter to continue...')
-        game.introDone = True
+        game.intro_done = True
 
     while True:
         clear()
-        print('What do you want to do?, {}!'.format(game.name))
+        print(f'What do you want to do?, {game.name}!')
         print('''
         1. Fight
         2. Rest
@@ -59,23 +57,23 @@ def game_loop(game):
         print('items:')
 
 
-        print('{} dmg[{}]' .format(game.sword.name, game.sword.damage))
-        print('{} def[{}]' .format(game.shield.name, game.shield.defense))
-        print('hp: {}'.format(game.hp))
-        print('xp: {}'.format(game.xp))
-        print('level: {}'.format(game.level))
+        print(f'{game.sword.name} dmg[{game.sword.damage}]')
+        print(f'{game.shield.name} def[{game.shield.defense}]')
+        print(f'hp: {game.hp}')
+        print(f'xp: {game.xp}')
+        print(f'level: {game.level}')
         game.generate_enemy(game.level)
         choice = input('Enter your choice: ')
         if choice == '1':
             clear()
-            print('You have encountered a {}!'.format(game.enemy.name))
+            print(f'You have encountered a {game.enemy.name}!')
             print('stats:')
-            print('hp: {}'.format(game.enemy.hp))
-            print('damage: {}'.format(game.enemy.dmg))
+            print(f'hp: {game.enemy.hp}')
+            print(f'damage: {game.enemy.dmg}')
             input('Press enter to continue...')
             while True:
                 clear()
-                print('What do you want to do?, {}!'.format(game.name))
+                print(f'What do you want to do?, {game.name}!')
                 print('''
                 1. Attack
                 2. Defend
@@ -84,39 +82,35 @@ def game_loop(game):
                 choice = input('Enter your choice: ')
                 if choice == '1':
                     game.attack(game.enemy)
-                    print('You attacked the {}!'.format(game.enemy.name))
+                    print(f'You attacked the {game.enemy.name}!')
                     print(
-                        'The {} has {} hp left!'.format(
-                            game.enemy.name,
-                            game.enemy.hp))
+                        f'The {game.enemy.name} has {game.enemy.hp} hp left!')
                     time.sleep(1)
                     if game.enemy.hp <= 0:
-                        print('You killed the {}!'.format(game.enemy.name))
+                        print(f'You killed the {game.enemy.name}!')
                         game.xp += 50
                         if game.xp >= 100:
                             game.level_up()
-                            print(
-                                'You leveled up! You are now level {}!'.format(
-                                    game.level))
-                            print(
-                                'You gained 10 hp! You now have {} hp!'.format(
-                                    game.hp))
+                            print(f'You leveled up! You are now level {game.level}!')
+                            print(f'You gained 10 hp! You now have {game.hp} hp!')
                             input('Press enter to continue...')
                             clear()
-                            print('{}'.format(game.prompt))
+                            print(f'{game.prompt}')
                             input('Press enter to continue...')
                             clear()
                         time.sleep(1)
                         game.generate_sword(game.level)
                         game.generate_shield(game.level)
                         print(f'You found a {game.sword.name}! It does {game.sword.damage} damage!')
-                        print(f'You found a {game.shield.name}! It has {game.shield.defense} defense!')
+                        print(
+                            f'You found a {game.shield.name}! It has {game.shield.defense} defense!'
+                            )
                         time.sleep(4)
                         break
                     else:
                         game.enemy.attack(game)
-                        print('The {} attacked you!'.format(game.enemy.name))
-                        print('You have {} hp left!'.format(game.hp))
+                        print(f'The {game.enemy.name} attacked you!')
+                        print(f'You have {game.hp} hp left!')
                         time.sleep(1)
                         if game.hp <= 0:
                             print('You died!')
@@ -124,14 +118,12 @@ def game_loop(game):
                             exit()
                 elif choice == '2':
                     game.defend()
-                    print(
-                        'You defended against the {}!'.format(
-                            game.enemy.name))
-                    print('You have {} hp left!'.format(game.hp))
+                    print(f'You defended against the {game.enemy.name}!')
+                    print(f'You have {game.hp} hp left!')
                     time.sleep(1)
                     game.enemy.attack(game)
-                    print('The {} attacked you!'.format(game.enemy.name))
-                    print('You have {} hp left!'.format(game.hp))
+                    print(f'The {game.enemy.name} attacked you!')
+                    print(f'You have {game.hp} hp left!')
                     time.sleep(1)
                     if game.hp <= 0:
                         print('You died!')
@@ -201,6 +193,7 @@ def menu():
 
 
 def clear():
+    '''FOr clearing the terminal window'''
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
