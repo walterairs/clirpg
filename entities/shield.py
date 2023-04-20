@@ -13,5 +13,5 @@ class Shield():
     def serialize(self):
         return {
             "name":self.name,
-            "damage":self.defense
+            "defense":self.defense
         }

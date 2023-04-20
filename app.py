@@ -58,8 +58,10 @@ def game_loop(game):
         3. Exit
         ''')
         print('items:')
-       # print('{} dmg[{}]' .format(game.sword.name, game.sword.damage))
-       # print('{} def[{}]' .format(game.shield.name, game.shield.defense))
+        
+        
+        print('{} dmg[{}]' .format(game.sword.name, game.sword.damage))
+        print('{} def[{}]' .format(game.shield.name, game.shield.defense))
         print('hp: {}'.format(game.hp))
         print('xp: {}'.format(game.xp))
         print('level: {}'.format(game.level))
@@ -150,9 +152,19 @@ def game_loop(game):
             if game.hp > game.maxHp:
                 game.hp = game.maxHp
         elif choice == '3':
-            data = game.toJSON()
-            #print(data)
-            exit()
+            while True:
+                user_input = input("Do you want to save? Y/N ").upper()
+                if user_input == 'Y':
+                    print("Saving...")
+                    game.toJSON()
+                    exit()
+                elif user_input == 'N':
+                    print("You did not save")
+                    exit()
+                else:
+                    print("Invalid input. Please enter 'Y' or 'N'.")
+            
+            
         else:
             print('Invalid choice!')
             continue
@@ -177,10 +189,7 @@ def menu():
         elif choice == '2':
             game = Player()
             print('Loading game...')
-            data = game.fromJSON()
-            print(data)
-            #set loaded data
-            
+            game.fromJSON()
             time.sleep(1)
         elif choice == '3':
             exit()
