@@ -5,12 +5,11 @@ monsters and gains xp and itmes.
 
 import time
 import os
-from loadhandler import Persistent
 from entities.player import Player
 from entities.conf.colors import Colors
 
-
 def game_loop(game):
+    '''Intro to the game'''
     while game.name == '':
         clear()
         print(Colors.OKGREEN + "Greetings," + Colors.ENDC)
@@ -20,7 +19,7 @@ def game_loop(game):
         print('Hello, {}!'.format(game.name))
         time.sleep(1)
 
-    while game.introDone == False:
+    while game.introDone is False:
         clear()
         print('Year 20B.c. in the kingdom of Aria')
         print('''
@@ -58,8 +57,8 @@ def game_loop(game):
         3. Exit
         ''')
         print('items:')
-        
-        
+
+
         print('{} dmg[{}]' .format(game.sword.name, game.sword.damage))
         print('{} def[{}]' .format(game.shield.name, game.shield.defense))
         print('hp: {}'.format(game.hp))
@@ -156,21 +155,21 @@ def game_loop(game):
                 user_input = input("Do you want to save? Y/N ").upper()
                 if user_input == 'Y':
                     print("Saving...")
-                    game.toJSON()
+                    game.to_json()
                     exit()
                 elif user_input == 'N':
                     print("You did not save")
                     exit()
                 else:
                     print("Invalid input. Please enter 'Y' or 'N'.")
-            
-            
+
         else:
             print('Invalid choice!')
             continue
 
 
 def menu():
+    '''Main menu'''
     game = None
 
     while True:
@@ -189,7 +188,7 @@ def menu():
         elif choice == '2':
             game = Player()
             print('Loading game...')
-            game.fromJSON()
+            game.from_json()
             time.sleep(1)
         elif choice == '3':
             exit()

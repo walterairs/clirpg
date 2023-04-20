@@ -1,66 +1,36 @@
-import pickle
-import json     
+"""Module providing json I/O"""
+import json
+
 class Persistent:
-    
-    @staticmethod
-    def serialize(path, obj):
-        file = None      
-        try:
-            file = open(path, 'bw')
-            # source, destination
-            pickle.dump(obj, file)
-            
-        except IOError as error:  
-            print(error) #  visible only if console is open
-        finally :
-            if file :
-                file.close()
-                
+    '''Class used for json input/output'''
 
     @staticmethod
-    def restore(path, cls):
-        file = None
-        obj = None
-        try :
-            file = open(path, 'br')
-            g = pickle.load(file)
-            if g and isinstance(g, cls):
-                obj = g
-                
-        except IOError as error :                             
-            print(error) #  visible only if console is open
-        finally:
-            if file :
-                file.close()
-        
-        return obj
-                
-    @staticmethod           
     def serjson(path, obj):
-        d = obj
+        '''Turns object into json'''
+        dic = obj
         try:
-            file = open(path, 'w')
-            json.dump(d, file, indent=4)
-            
-        except Exception as error:  
+            file = open(path, 'w', encoding='UTF-8')
+            json.dump(dic, file, indent=4)
+        except IOError as error:
             print(error) #  visible only if console is open
         finally :
             if file :
-                file.close()            
+                file.close()
 
     @staticmethod
     def resjson(path):
+        '''Turns json into object'''
         file = None
-        d = None
+        dic = None
         try :
             file = open(path, 'br')
-            g = json.load(file)
-            if g and isinstance(g, dict):
-                d =  g
-        except IOError as error :                             
+            temp = json.load(file)
+            if temp and isinstance(temp, dict):
+                dic =  temp
+        except IOError as error :
             print(error) #  visible only if console is open
         finally:
             if file :
                 file.close()
-        return d
+        return dic
                 

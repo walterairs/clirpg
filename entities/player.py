@@ -1,13 +1,15 @@
-from entities.enemy import Enemy
-from entities.sword import Sword
-from entities.shield import Shield
+"""Import for json I/O and access to other files"""
 from types import SimpleNamespace
 import random
 import json
+from entities.enemy import Enemy
+from entities.sword import Sword
+from entities.shield import Shield
 import loadhandler
 
 class Player():
-    prompts = open("entities\\conf\\prompts.txt", "r")
+    '''Player class'''
+    prompts = open("entities\\conf\\prompts.txt", "r", encoding='UTF-8')
     promptslist = prompts.readlines()
     prompts.close()
 
@@ -24,42 +26,50 @@ class Player():
         self.prompt = ""
         self.flag = 0
 
-    def generate_sword(self, maxDamage):
-        self.sword = Sword(maxDamage)
+    def generate_sword(self, max_damage):
+        '''Method to create sword'''
+        self.sword = Sword(max_damage)
         self.flag = 1
 
-    def generate_shield(self, maxDefense):
-        self.shield = Shield(maxDefense)
+    def generate_shield(self, max_defense):
+        '''Method to create shield'''
+        self.shield = Shield(max_defense)
         self.flag = 1
 
-    def generate_enemy(self, statBase):
-        self.enemy = Enemy(statBase)
+    def generate_enemy(self, stat_base):
+        '''Method to create enemy'''
+        self.enemy = Enemy(stat_base)
 
     def attack(self, enemy):
+        '''Method to attack'''
         if enemy.hp - self.sword.damage <= 0:
             enemy.hp = 0
         else:
             enemy.hp -= self.sword.damage
 
     def defend(self):
+        '''Method to heal the player during combat'''
         self.hp += self.shield.defense
         if self.hp > self.maxHp:
             self.hp = self.maxHp
 
     def is_dead(self):
+        '''To find out if player dead or not'''
         if self.hp <= 0:
             return True
         else:
             return False
 
     def level_up(self):
+        '''Level up handler'''
         self.level += 1
         self.xp = 0
         self.maxHp = self.level * 10
         self.hp = self.maxHp
         self.prompt = random.choice(self.promptslist)
 
-    def toJSON(self):
+    def to_json(self):
+        '''Saving object to json'''
         data = {
             'name':self.name,
             'introDone':self.introDone,
@@ -75,28 +85,29 @@ class Player():
             loadhandler.Persistent.serjson('entities/shield.json', self.shield.serialize())
         loadhandler.Persistent.serjson('entities/enemy.json', self.enemy.serialize())
 
-    def fromJSON(self):
+    def from_json(self):
+        '''Loading object from json'''
         data = loadhandler.Persistent.resjson('entities/player.json')
         if 'name' in data:
-                self.name = data['name']
-                self.introDone = data['introDone']
-                self.hp = data['hp']
-                self.maxHp = data['maxhp']
-                self.xp = data ['xp']
-                self.level = data ['level']
-                self.prompt = data ['prompt']
+            self.name = data['name']
+            self.introDone = data['introDone']
+            self.hp = data['hp']
+            self.maxHp = data['maxhp']
+            self.xp = data ['xp']
+            self.level = data ['level']
+            self.prompt = data ['prompt']
 
-        swordDataPath = 'entities/sword.json'
-        with open(swordDataPath, 'r') as j:
+        sword_data_path = 'entities/sword.json'
+        with open(sword_data_path, 'r', encoding='UTF-8') as j:
             swordcontent = json.load(j, object_hook=lambda d: SimpleNamespace(**d))
         self.sword = swordcontent
 
-        shieldDataPath = 'entities/shield.json'
-        with open(shieldDataPath, 'r') as k:
+        shield_data_path = 'entities/shield.json'
+        with open(shield_data_path, 'r', encoding='UTF-8') as k:
             shieldcontent = json.load(k, object_hook=lambda d: SimpleNamespace(**d))
         self.shield = shieldcontent
 
-        enemyDataPath = 'entities/enemy.json'
-        with open(enemyDataPath, 'r') as n:
-            enemycontent = json.load(n, object_hook=lambda d: SimpleNamespace(**d))
+        enemy_data_path = 'entities/enemy.json'
+        with open(enemy_data_path, 'r', encoding='UTF-8') as edp:
+            enemycontent = json.load(edp, object_hook=lambda d: SimpleNamespace(**d))
         self.enemy = enemycontent

@@ -1,7 +1,8 @@
+"""Needed for randomization"""
 import random
 
 class Enemy():
-    names = open("entities\conf\enemynames.txt", "r")
+    names = open("entities\\conf\\enemynames.txt", "r", encoding='UTF-8')
     enemynames = names.readlines()
     names.close()
 
@@ -29,11 +30,13 @@ class Enemy():
             return True
         else:
             return False
-        
+
     def serialize(self):
+        '''Method to serialize object data for json'''
         return {
             "name":self.name,
             'hp':self.hp,
             'maxhp':self.maxHp,
             'dmg':self.dmg
         }
+    

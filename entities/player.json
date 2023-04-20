@@ -1,9 +1,9 @@
 {
     "name": "asd",
     "introDone": true,
-    "hp": 20,
-    "maxhp": 20,
-    "xp": 0,
-    "level": 2,
-    "prompt": "You feel a sense of pride and accomplishment as you rise to the next level of your journey.\n"
+    "hp": 60,
+    "maxhp": 100,
+    "xp": 50,
+    "level": 1,
+    "prompt": ""
 }
