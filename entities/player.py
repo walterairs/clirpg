@@ -51,7 +51,7 @@ class Player():
     def level_up(self):
         self.level += 1
         self.xp = 0
-        self.maxHp = self.level * 100
+        self.maxHp = self.level * 10
         self.hp = self.maxHp
         self.prompt = random.choice(self.promptslist)
 
