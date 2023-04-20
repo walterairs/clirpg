@@ -3,8 +3,8 @@ import random
 
 class Sword():
     '''Method to create and update the sword'''
-    swords = open("entities\\conf\\swordnames.txt", "r", encoding='UTF-8')
-    swordnames = swords.readlines()
+    with open("entities\\conf\\swordnames.txt", "r", encoding='UTF-8') as swords:
+        swordnames = swords.readlines()
     swords.close()
 
     def __init__(self,max_damage):

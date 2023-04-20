@@ -9,8 +9,8 @@ class Persistent:
         '''Turns object into json'''
         dic = obj
         try:
-            file = open(path, 'w', encoding='UTF-8')
-            json.dump(dic, file, indent=4)
+            with open(path, 'w', encoding='UTF-8') as file:
+                json.dump(dic, file, indent=4)
         except IOError as error:
             print(error) #  visible only if console is open
         finally :
@@ -23,8 +23,8 @@ class Persistent:
         file = None
         dic = None
         try :
-            file = open(path, 'br')
-            temp = json.load(file)
+            with open(path, 'br') as file:
+                temp = json.load(file)
             if temp and isinstance(temp, dict):
                 dic =  temp
         except IOError as error :

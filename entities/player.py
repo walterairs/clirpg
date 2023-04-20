@@ -17,7 +17,7 @@ class Player():
         self.name = ""
         self.intro_done = False
         self.hp = 100
-        self.max_hp = 100
+        self.maxhp = 100
         self.sword = None
         self.shield = None
         self.enemy = None
@@ -50,22 +50,19 @@ class Player():
     def defend(self):
         '''Method to heal the player during combat'''
         self.hp += self.shield.defense
-        if self.hp > self.max_hp:
-            self.hp = self.max_hp
+        if self.hp > self.maxhp:
+            self.hp = self.maxhp
 
     def is_dead(self):
         '''To find out if player dead or not'''
-        if self.hp <= 0:
-            return True
-        else:
-            return False
+        return True if self.hp <= 0 else False
 
     def level_up(self):
         '''Level up handler'''
         self.level += 1
         self.xp = 0
-        self.max_hp = self.level * 10
-        self.hp = self.max_hp
+        self.maxhp = self.level * 10
+        self.hp = self.maxhp
         self.prompt = random.choice(self.promptslist)
 
     def to_json(self):
@@ -74,7 +71,7 @@ class Player():
             'name':self.name,
             'introDone':self.intro_done,
             'hp':self.hp,
-            'max_hp':self.max_hp,
+            'maxhp':self.maxhp,
             'xp':self.xp,
             'level':self.level,
             'prompt':self.prompt
@@ -92,7 +89,7 @@ class Player():
             self.name = data['name']
             self.intro_done = data['introDone']
             self.hp = data['hp']
-            self.max_hp = data['max_hp']
+            self.maxhp = data['maxhp']
             self.xp = data ['xp']
             self.level = data ['level']
             self.prompt = data ['prompt']

@@ -2,8 +2,9 @@
 import random
 
 class Enemy():
-    names = open("entities\\conf\\enemynames.txt", "r", encoding='UTF-8')
-    enemynames = names.readlines()
+    '''Enemy class'''
+    with open("entities\\conf\\enemynames.txt", "r", encoding='UTF-8') as names:
+        enemynames = names.readlines()
     names.close()
 
     def __init__(self, stat_base):
@@ -31,8 +32,8 @@ class Enemy():
         if self.hp <= 0:
             self.hp = 0
             return True
-        else:
-            return False
+
+        return False
 
     def serialize(self):
         '''Method to serialize object data for json'''

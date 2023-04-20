@@ -140,8 +140,8 @@ def game_loop(game):
             print('You rested!')
             time.sleep(1)
             game.hp += 10
-            if game.hp > game.maxHp:
-                game.hp = game.maxHp
+            if game.hp > game.maxhp:
+                game.hp = game.maxhp
         elif choice == '3':
             while True:
                 user_input = input("Do you want to save? Y/N ").upper()

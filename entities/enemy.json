@@ -1,6 +1,6 @@
 {
-    "name": "Chimera's Roar\n",
-    "hp": 65,
-    "maxhp": 65,
-    "dmg": 11
+    "name": "Skeletal Dragon\n",
+    "hp": 183,
+    "max_hp": 183,
+    "dmg": 22
 }

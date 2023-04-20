@@ -1,9 +1,9 @@
 {
     "name": "asd",
     "introDone": true,
-    "hp": 60,
-    "maxhp": 100,
-    "xp": 50,
-    "level": 1,
-    "prompt": ""
+    "hp": 20,
+    "maxhp": 20,
+    "xp": 0,
+    "level": 2,
+    "prompt": "The thrill of victory fills you with a rush of adrenaline as you emerge victorious from a fierce battle.\n"
 }

@@ -1,3 +1,14 @@
+'''Class for colors example:
+print(Colors.HEADER + 'Hello World!')
+print(Colors.OKBLUE + 'Hello World!')
+print(Colors.OKCYAN + 'Hello World!')
+print(Colors.OKGREEN + 'Hello World!')
+print(Colors.WARNING + 'Hello World!')
+print(Colors.FAIL + 'Hello World!')
+print(Colors.ENDC + 'Hello World!')
+print(Colors.BOLD + 'Hello World!')
+print(Colors.UNDERLINE + 'Hello World!')'''
+
 class Colors():
     '''Colors class'''
     HEADER = '\033[95m'
@@ -9,14 +20,3 @@ class Colors():
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
-
-
-'''print(Colors.HEADER + 'Hello World!')
-print(Colors.OKBLUE + 'Hello World!')
-print(Colors.OKCYAN + 'Hello World!')
-print(Colors.OKGREEN + 'Hello World!')
-print(Colors.WARNING + 'Hello World!')
-print(Colors.FAIL + 'Hello World!')
-print(Colors.ENDC + 'Hello World!')
-print(Colors.BOLD + 'Hello World!')
-print(Colors.UNDERLINE + 'Hello World!')'''
