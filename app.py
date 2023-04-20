@@ -58,8 +58,8 @@ def game_loop(game):
         3. Exit
         ''')
         print('items:')
-        print('{} dmg[{}]' .format(game.sword.name, game.sword.damage))
-        print('{} def[{}]' .format(game.shield.name, game.shield.defense))
+       # print('{} dmg[{}]' .format(game.sword.name, game.sword.damage))
+       # print('{} def[{}]' .format(game.shield.name, game.shield.defense))
         print('hp: {}'.format(game.hp))
         print('xp: {}'.format(game.xp))
         print('level: {}'.format(game.level))
@@ -67,7 +67,6 @@ def game_loop(game):
         choice = input('Enter your choice: ')
         if choice == '1':
             clear()
-            #game.generate_enemy(game.level)
             print('You have encountered a {}!'.format(game.enemy.name))
             print('stats:')
             print('hp: {}'.format(game.enemy.hp))

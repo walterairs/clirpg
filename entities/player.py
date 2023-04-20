@@ -24,6 +24,7 @@ class Player():
 
     def generate_sword(self, maxDamage):
         self.sword = Sword(maxDamage)
+        #self.__sword.__dict__ = self.sword
 
     def generate_shield(self, maxDefense):
         self.shield = Shield(maxDefense)
@@ -61,19 +62,14 @@ class Player():
             'introDone':self.introDone,
             'hp':self.hp,
             'maxhp':self.maxHp,
-            'sword':self.sword.name,
-            'sworddmg':self.sword.damage,
-            'shield':self.shield.name,
-            'shielddef':self.shield.defense,
-            'enemyname':self.enemy.name,
-            'enemyhp':self.enemy.hp,
-            'enemymaxhp':self.enemy.maxHp,
-            'enemydmg':self.enemy.dmg,
             'xp':self.xp,
             'level':self.level,
             'prompt':self.prompt
         }
-        loadhandler.Persistent.serjson('entities/savefile.json', data)
+        loadhandler.Persistent.serjson('entities/player.json', data)
+        loadhandler.Persistent.serjson('entities/sword.json', self.sword.serialize())
+        loadhandler.Persistent.serjson('entities/shield.json', self.shield.serialize())
+        loadhandler.Persistent.serjson('entities/enemy.json', self.enemy.serialize())
 
     def fromJSON(self):
         data = loadhandler.Persistent.resjson('entities/savefile.json')
@@ -83,9 +79,6 @@ class Player():
                 self.introDone = data['introDone']
                 self.hp = data['hp']
                 self.maxHp = data['maxhp']
-                self.sword = "linkkuveitti"
-                self.shield = data['shield']
-                #self.enemy = data ['enemy']
                 self.xp = data ['xp']
                 self.level = data ['level']
                 self.prompt = data ['prompt']

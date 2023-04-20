@@ -29,3 +29,11 @@ class Enemy():
             return True
         else:
             return False
+        
+    def serialize(self):
+        return {
+            "name":self.name,
+            'hp':self.hp,
+            'maxhp':self.maxHp,
+            'dmg':self.dmg
+        }

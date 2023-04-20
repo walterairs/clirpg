@@ -8,3 +8,9 @@ class Sword():
     def __init__(self, maxDamage):
         self.name = random.choice(self.swordnames)
         self.damage = random.randint(maxDamage * 10 - 3, maxDamage * 10 + 3)
+
+    def serialize(self):
+        return {
+            "name":self.name,
+            "damage":self.damage
+        }

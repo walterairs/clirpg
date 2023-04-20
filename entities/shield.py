@@ -9,3 +9,9 @@ class Shield():
     def __init__(self, maxDefense):
         self.name = random.choice(self.shieldnames)
         self.defense = random.randint(maxDefense * 10 - 3, maxDefense * 10 + 3)
+
+    def serialize(self):
+        return {
+            "name":self.name,
+            "damage":self.defense
+        }
