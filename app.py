@@ -108,12 +108,8 @@ def game_loop(game):
                         time.sleep(1)
                         game.generate_sword(game.level)
                         game.generate_shield(game.level)
-                        print(
-                            'You found a {}! It does {} damage!'.format(
-                                game.sword.name, game.sword.damage))
-                        print(
-                            'You found a {}! It has {} defense!'.format(
-                                game.shield.name, game.shield.defense))
+                        print(f'You found a {game.sword.name}! It does {game.sword.damage} damage!')
+                        print(f'You found a {game.shield.name}! It has {game.shield.defense} defense!')
                         time.sleep(4)
                         break
                     else:
