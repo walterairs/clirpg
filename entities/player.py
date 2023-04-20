@@ -3,7 +3,7 @@ from entities.sword import Sword
 from entities.shield import Shield
 import random
 import json
-
+import loadhandler
 
 class Player():
     prompts = open("entities\\conf\\prompts.txt", "r")
@@ -56,5 +56,36 @@ class Player():
         self.prompt = random.choice(self.promptslist)
 
     def toJSON(self):
-        return json.dumps(self, default=lambda o: o.__dict__,
-                          sort_keys=True, indent=4)
+        data = {
+            'name':self.name,
+            'introDone':self.introDone,
+            'hp':self.hp,
+            'maxhp':self.maxHp,
+            'sword':self.sword.name,
+            'sworddmg':self.sword.damage,
+            'shield':self.shield.name,
+            'shielddef':self.shield.defense,
+            'enemyname':self.enemy.name,
+            'enemyhp':self.enemy.hp,
+            'enemymaxhp':self.enemy.maxHp,
+            'enemydmg':self.enemy.dmg,
+            'xp':self.xp,
+            'level':self.level,
+            'prompt':self.prompt
+        }
+        loadhandler.Persistent.serjson('entities/savefile.json', data)
+
+    def fromJSON(self):
+        data = loadhandler.Persistent.resjson('entities/savefile.json')
+        print("loaded data: ", data)
+        if 'name' in data:
+                self.name = data['name']
+                self.introDone = data['introDone']
+                self.hp = data['hp']
+                self.maxHp = data['maxhp']
+                self.sword = "linkkuveitti"
+                self.shield = data['shield']
+                #self.enemy = data ['enemy']
+                self.xp = data ['xp']
+                self.level = data ['level']
+                self.prompt = data ['prompt']

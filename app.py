@@ -63,10 +63,11 @@ def game_loop(game):
         print('hp: {}'.format(game.hp))
         print('xp: {}'.format(game.xp))
         print('level: {}'.format(game.level))
+        game.generate_enemy(game.level)
         choice = input('Enter your choice: ')
         if choice == '1':
             clear()
-            game.generate_enemy(game.level)
+            #game.generate_enemy(game.level)
             print('You have encountered a {}!'.format(game.enemy.name))
             print('stats:')
             print('hp: {}'.format(game.enemy.hp))
@@ -151,7 +152,7 @@ def game_loop(game):
                 game.hp = game.maxHp
         elif choice == '3':
             data = game.toJSON()
-            # print(data)
+            #print(data)
             exit()
         else:
             print('Invalid choice!')
@@ -175,7 +176,12 @@ def menu():
             time.sleep(1)
             game = Player()
         elif choice == '2':
+            game = Player()
             print('Loading game...')
+            data = game.fromJSON()
+            print(data)
+            #set loaded data
+            
             time.sleep(1)
         elif choice == '3':
             exit()
