@@ -59,8 +59,8 @@ def game_loop(game):
 
         print(f'{game.sword.name} dmg[{game.sword.damage}]')
         print(f'{game.shield.name} def[{game.shield.defense}]')
-        print(f'hp: {game.hp}')
-        print(f'xp: {game.xp}')
+        print(f'health: {game.health}')
+        print(f'experience: {game.experience}')
         print(f'level: {game.level}')
         game.generate_enemy(game.level)
         choice = input('Enter your choice: ')
@@ -68,7 +68,7 @@ def game_loop(game):
             clear()
             print(f'You have encountered a {game.enemy.name}!')
             print('stats:')
-            print(f'hp: {game.enemy.hp}')
+            print(f'health: {game.enemy.health}')
             print(f'damage: {game.enemy.dmg}')
             input('Press enter to continue...')
             while True:
@@ -84,15 +84,15 @@ def game_loop(game):
                     game.attack(game.enemy)
                     print(f'You attacked the {game.enemy.name}!')
                     print(
-                        f'The {game.enemy.name} has {game.enemy.hp} hp left!')
+                        f'The {game.enemy.name} has {game.enemy.health} hp left!')
                     time.sleep(1)
-                    if game.enemy.hp <= 0:
+                    if game.enemy.health <= 0:
                         print(f'You killed the {game.enemy.name}!')
-                        game.xp += 50
-                        if game.xp >= 100:
+                        game.experience += 50
+                        if game.experience >= 100:
                             game.level_up()
                             print(f'You leveled up! You are now level {game.level}!')
-                            print(f'You gained 10 hp! You now have {game.hp} hp!')
+                            print(f'You gained 10 hp! You now have {game.health} hp!')
                             input('Press enter to continue...')
                             clear()
                             print(f'{game.prompt}')
@@ -110,22 +110,22 @@ def game_loop(game):
                     else:
                         game.enemy.attack(game)
                         print(f'The {game.enemy.name} attacked you!')
-                        print(f'You have {game.hp} hp left!')
+                        print(f'You have {game.health} hp left!')
                         time.sleep(1)
-                        if game.hp <= 0:
+                        if game.health <= 0:
                             print('You died!')
                             time.sleep(1)
                             exit()
                 elif choice == '2':
                     game.defend()
                     print(f'You defended against the {game.enemy.name}!')
-                    print(f'You have {game.hp} hp left!')
+                    print(f'You have {game.health} hp left!')
                     time.sleep(1)
                     game.enemy.attack(game)
                     print(f'The {game.enemy.name} attacked you!')
-                    print(f'You have {game.hp} hp left!')
+                    print(f'You have {game.health} hp left!')
                     time.sleep(1)
-                    if game.hp <= 0:
+                    if game.health <= 0:
                         print('You died!')
                         time.sleep(1)
                         exit()
@@ -139,9 +139,9 @@ def game_loop(game):
         elif choice == '2':
             print('You rested!')
             time.sleep(1)
-            game.hp += 10
-            if game.hp > game.maxhp:
-                game.hp = game.maxhp
+            game.health += 10
+            if game.health > game.maxhp:
+                game.health = game.maxhp
         elif choice == '3':
             while True:
                 user_input = input("Do you want to save? Y/N ").upper()

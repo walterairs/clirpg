@@ -17,4 +17,3 @@ class Sword():
             "name":self.name,
             "damage":self.damage
         }
-    

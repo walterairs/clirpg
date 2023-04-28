@@ -1,6 +1,6 @@
 {
-    "name": "Lizardman Hunter\n",
-    "hp": 164,
-    "max_hp": 164,
-    "dmg": 16
+    "name": "Nightshade\n",
+    "health": 27,
+    "maxhp": 27,
+    "dmg": 9
 }
